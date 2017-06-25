@@ -1,4 +1,4 @@
-;;; hooker.el --- easy hookups -*- lexical-binding: t -*-
+;;; hooker.el --- Boom Boom Boom Boom -*- lexical-binding: t -*-
 (eval-when-compile
   (require 'umr))
 (require 'miscellaneous)
