@@ -1,9 +1,9 @@
-;;; hooker.el --- Boom Boom Boom Boom -*- lexical-binding: t -*-
+;;; hook-up.el --- Boom Boom Boom Boom -*- lexical-binding: t -*-
 (eval-when-compile
   (require 'umr))
 (require 'miscellaneous)
 
-(defmacro hooker-make-hook (WHEN PROCEDURE &rest CONTINGENT)
+(defmacro hook-up-make-hook (WHEN PROCEDURE &rest CONTINGENT)
   "Set up a hook to run WHEN PROCEDURE.
     Create variable WHEN-PROCEDURE-hook and assign it the value CONTINGENT.
     Create function WHEN-PROCEDURE-hook to run WHEN PROCEDURE-hook using `run-hooks'.
@@ -21,11 +21,11 @@
                   '((name . ,hook)
                     (depth . -100))))))
 
-(defun hooker-hook-up (HOOKS FUNCTIONS)
+(defun hook-up (HOOKS FUNCTIONS)
   "Hang all FUNCTIONS, in order, on all HOOKS."
   (seq-doseq (h HOOKS)
     (seq-doseq (f (seq-reverse FUNCTIONS))
       (add-hook h f))))
 
 
-(provide 'hooker)
+(provide 'hook-up)
