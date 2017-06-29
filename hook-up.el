@@ -2,6 +2,7 @@
 (eval-when-compile
   (require 'umr))
 (require 'miscellaneous)
+;; (require 'seq) ; required by `umr'
 
 (defmacro hook-up-make-hook (WHEN PROCEDURE &rest CONTINGENT)
   "Set up a hook to run WHEN PROCEDURE.
