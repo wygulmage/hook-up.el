@@ -22,11 +22,13 @@
                   '((name . ,hook)
                     (depth . -100))))))
 
-(defun hook-up (HOOKS FUNCTIONS)
-  "Hang all FUNCTIONS, in order, on all HOOKS."
+(defun hook-up (HOOKS FUNCTIONS &rest FLAGS)
+  "Hang all FUNCTIONS, in order, on all HOOKS.
+If FLAGS includes :append, the functions are added to the end of the hook.
+If FLAGS includes :local, the functions are added to the buffer-local hook."
   (seq-doseq (h HOOKS)
     (seq-doseq (f (seq-reverse FUNCTIONS))
-      (add-hook h f))))
+      (add-hook h f (memq :append FLAGS) (memq :local FLAGS)))))
 
 
 (provide 'hook-up)
