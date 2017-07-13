@@ -19,6 +19,18 @@ Use `advice-add' to add run-WHEN-PROCEDURE-hook as advice to PROCEDURE."
                   '((name . ,hook)
                     (depth . -100))))))
 
+(defun hook-up-def-hook (WHEN PROCEDURE &rest CONTINGENT)
+  (let ((hook (misc--symb WHEN "-" PROCEDURE "-hook")))
+    (set hook CONTINGENT)
+    (put hook 'variable-documentation (misc--mkstr "procedures to run " WHEN " `" PROCEDURE "'"))
+    (fset hook
+          `(lambda (&rest _)
+             ,(misc--mkstr "Use `run-hooks' to run `" hook "'.")
+             (run-hooks ',hook)))
+    (advice-add PROCEDURE WHEN hook
+                '((name . ,hook)
+                  (depth . -100)))))
+
 (defun hook-up (HOOKS FUNCTIONS &rest FLAGS)
   "Hang all FUNCTIONS, in order, on all HOOKS.
 If FLAGS includes :append, the functions are hanged on the end of the hook.
