@@ -20,6 +20,9 @@ Use `advice-add' to add run-WHEN-PROCEDURE-hook as advice to PROCEDURE."
                     (depth . -100))))))
 
 (defun hook-up-def-hook (WHEN PROCEDURE &rest CONTINGENT)
+  "Set up a hook to run WHEN PROCEDURE:
+Create variable WHEN-PROCEDURE-hook and assign it the value CONTINGENT.
+Create function WHEN-PROCEDURE-hook to run WHEN PROCEDURE-hook using `run-hooks'."
   (let ((hook (misc--symb WHEN "-" PROCEDURE "-hook")))
     (set hook CONTINGENT)
     (put hook 'variable-documentation (misc--mkstr "procedures to run " WHEN " `" PROCEDURE "'"))
